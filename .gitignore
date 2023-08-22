@@ -1,0 +1,5 @@
+/composer.lock
+/logs/*.txt
+/public/bootstrap/
+/vendor/
+/public/jquery/

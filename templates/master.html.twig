@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block head %}
+		<title>{% block title %}{% endblock %}</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		{% include 'components/header/css.html.twig' %}
+	{% endblock %}
+</head>
+<body>
+<header>
+	{% block htmlheader %}
+	{% endblock %}
+</header>
+<main>
+	<div class="container-fluid">
+		{% block content %}
+		{% endblock %}
+	</div>
+</main>
+{% block scripts %}
+	{% include 'components/footer/scripts.html.twig' %}
+{% endblock %}
+</body>
+</html>

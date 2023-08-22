@@ -1,0 +1,41 @@
+{
+    "name": "jblond/maas",
+    "description": "Morse as a Service (Maas)",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "jblond/morse": "*",
+        "twbs/bootstrap": "5.*",
+        "twig/twig": ">=3.0.0",
+        "axllent/jquery": "*"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "jblond\\maas\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JBlond"
+        }
+    ],
+    "scripts": {
+        "bootstrap": [
+            "rm -rf public/bootstrap",
+            "rm -rf public/jquery",
+            "cp -R vendor/twbs/bootstrap/dist public/bootstrap",
+            "cp -R vendor/axllent/jquery/ public/jquery"
+        ],
+        "post-update-cmd": [
+            "@bootstrap"
+        ]
+    },
+    "scripts-descriptions": {
+        "bootstrap": ":: Deploy bootrstrap"
+    }
+}

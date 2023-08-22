@@ -1,0 +1,26 @@
+:root {
+	--bs-body-bg: #212529;
+	--dark-gray: #4c4c4e;
+	--medium-gray: #dcddde;
+	--light-gray: #f1f2f2;
+	--white: #ffffff;
+}
+body {
+	background-color: var(--bs-body-bg);
+	color: var(--white);
+	font-size: 1em;
+	font-style: normal;
+}
+
+.form-control:focus, .form-control, .form-select {
+	color: var(--white);
+}
+
+.form-control:disabled {
+	background-color: var(--bs-body-bg);
+	color: var(--white);
+}
+
+.nav-link, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: var(--white);
+}

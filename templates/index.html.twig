@@ -1,0 +1,113 @@
+{% extends"master.html.twig" %}
+{% block title %}MaaS{% endblock %}
+{% block head %}
+	{{ parent() }}
+{% endblock %}
+{% block htmlheader %}
+{% endblock %}
+{% block content %}
+	<ul class="nav nav-tabs" id="morseTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="audio-tab" data-bs-toggle="tab" data-bs-target="#audio-tab-pane" type="button"
+			        aria-controls="audio-tab-pane" aria-selected="true">Audio
+			</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="dotDash-tab" data-bs-toggle="tab" data-bs-target="#dotDash-tab-pane"
+			        type="button" aria-controls="dotDash-tab-pane" aria-selected="false">Dot Dash
+			</button>
+		</li>
+	</ul>
+	<div class="tab-content" id="morseTabContent">
+		<div class="tab-pane fade show active" id="audio-tab-pane" role="tabpanel" aria-labelledby="audio-tab" tabindex="0">
+			<form method="post" id="sender" action="audio.php">
+				<div class="mb-3">
+					<label for="morse-text" class="form-label">Text</label>
+					<textarea class="form-control" id="morse-text" name="morse-text" rows="3"></textarea><br>
+					<div class="mb-1">
+						<label for="wpm">Words per Minute</label>
+						<select class="form-select" aria-label="Words per Minute" id="wpm" name="wpm">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="25" selected>25</option>
+							<option value="30">30</option>
+							<option value="35">35</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+							<option value="60">60</option>
+							<option value="70">70</option>
+							<option value="80">80</option>
+							<option value="90">90</option>
+							<option value="100">100</option>
+							<option value="110">110</option>
+							<option value="120">120</option>
+						</select>
+					</div>
+					<div class="mb-1">
+						<label for="frequency">Audio frequency (Hz)</label>
+						<select class="form-select" aria-label="Words per Minute" id="frequency" name="frequency">
+							<option value="500">500</option>
+							<option value="550">550</option>
+							<option value="600">600</option>
+							<option value="650">650</option>
+							<option value="700" selected>700</option>
+							<option value="750">750</option>
+							<option value="800">800</option>
+							<option value="850">850</option>
+							<option value="900">900</option>
+							<option value="950">950</option>
+							<option value="1000">1000</option>
+						</select>
+					</div>
+
+					<button type="button" class="btn btn-secondary" id="convert">Convert</button>
+				</div>
+			</form>
+		</div>
+		<div class="tab-pane fade" id="dotDash-tab-pane" role="tabpanel" aria-labelledby="dotDash-tab" tabindex="0">
+			<form method="post" id="sender2" action="text.php">
+				<div class="mb-3">
+					<label for="morseText" class="form-label">Text</label>
+					<textarea class="form-control" id="morseText" name="morseText" rows="3"></textarea><br>
+					<label for="morse-binary" class="form-label">Text binary</label>
+					<textarea class="form-control" id="morse-binary" name="morse-binary" rows="3" disabled></textarea><br>
+					<label for="morse-dashDot" class="form-label">Text dash dot</label>
+					<textarea class="form-control" id="morse-dashDot" name="morse-dashDot" rows="3" disabled></textarea>
+				</div>
+
+				<button type="button" class="btn btn-secondary" id="convert2">Convert</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+{% block scripts %}
+	{{ parent() }}
+	<script>
+		jQuery(document).ready(function () {
+			'use strict';
+			jQuery("#convert").on({
+				click: function (event) {
+					event.preventDefault();
+					jQuery('#sender').submit();
+				}
+			});
+			jQuery("#convert2").on({
+				click: function (event) {
+					event.preventDefault();
+					let $text = jQuery('textarea#morseText').val();
+					jQuery.post({
+						url: 'text.php',
+						data: {morseText: $text},
+						success: function (message){
+							jQuery('textarea#morse-binary').val(message.binary);
+							jQuery('textarea#morse-dashDot').val(message.text);
+						}
+					});
+
+				}
+			});
+		});
+	</script>
+{% endblock %}

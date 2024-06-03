@@ -1,5 +1,6 @@
 /composer.lock
 /logs/*.txt
+/logs/nginx/*.log
 /public/bootstrap/
 /vendor/
 /public/jquery/

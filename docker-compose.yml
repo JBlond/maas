@@ -1,15 +1,23 @@
 services:
-  php:
-    image: webdevops/php-nginx:8.2
-    container_name: maas
-    working_dir: /app
-    environment:
-      - WEB_DOCUMENT_ROOT=/app/public
-      - PHP_DISPLAY_ERRORS=1
-      - PHP_MEMORY_LIMIT=2048M
-      - PHP_MAX_EXECUTION_TIME=-1
-      - PHP_DATE_TIMEZONE = Europe/Berlin
+  openresty:
+    container_name: maas-web
+    image: openresty/openresty:alpine
+    restart: unless-stopped
     ports:
-      - "80:80"
+      - "9001:80"
     volumes:
-      - ./:/app:rw,cached
+      - ./conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx:/var/log/nginx:rw
+      - ./:/app:rw"
+  phpfpm:
+    image: bitnami/php-fpm:8.2
+    container_name: maas-php
+    restart: unless-stopped
+    volumes:
+      - ./:/app:rw
+      - ./conf/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf
+      - ./conf/www.conf:/opt/bitnami/php/etc/php-fpm.d/www.conf
+    environment:
+      TZ: "Europe/Berlin"
+

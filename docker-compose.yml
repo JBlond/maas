@@ -20,4 +20,5 @@ services:
       - ./conf/www.conf:/opt/bitnami/php/etc/php-fpm.d/www.conf
     environment:
       TZ: "Europe/Berlin"
+      PHP_MEMORY_LIMIT: "2G"
 

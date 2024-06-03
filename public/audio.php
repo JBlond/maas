@@ -4,6 +4,7 @@ use jblond\morse\Wave;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
+ini_set('memory_limit', '2048M');
 
 require '../vendor/autoload.php';
 

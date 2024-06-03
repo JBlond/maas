@@ -10,6 +10,6 @@ Text generation and wav file generation of Morse code.
 
 ```bash
 docker compose up -d
-docker exec -it maas bash
+docker exec -it maas-php bash
 composer update --no-dev
 ```

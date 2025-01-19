@@ -1,7 +1,7 @@
 services:
   openresty:
     container_name: maas-web
-    image: openresty/openresty:alpine
+    image: openresty/openresty:alpine-apk
     restart: unless-stopped
     ports:
       - "9001:80"

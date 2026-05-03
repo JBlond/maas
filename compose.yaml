@@ -11,7 +11,7 @@ services:
       - ./logs/nginx:/var/log/nginx:rw
       - ./:/app:rw"
   phpfpm:
-    image: bitnamisecure/php-fpm:8.2
+    image: bitnamisecure/php-fpm:latest
     container_name: maas-php
     restart: unless-stopped
     volumes:
